@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import axios from 'axios'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'product';
+  products = []
+
+
+  BASE_URL = 'http://localhost:3000';
+
+
+  ngOnInit() {
+     axios
+      .get(this.BASE_URL + '/list/products')
+      .then(result => {
+        this.products = result.data
+      })
+      .catch(e => console.log(e))
+  }
+
 }
+
